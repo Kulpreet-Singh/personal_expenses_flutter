@@ -12,6 +12,7 @@
    Currently this app stores all the data locally on the device itself, not on any server. (One can consider this as a pre-release)
 
    The current release only contains the .apk file as deployment of IOS app requires a Mac-OS based system (Not available to me currently).
+   - Direct Download Link of the app-release.apk: https://github.com/Kulpreet-Singh/personal_expenses_flutter/releases/download/1.0.0/app-release.apk
    
    There can be further scope of optimization which I have not yet explored. This can be considered as a pre-release of this app.
 
