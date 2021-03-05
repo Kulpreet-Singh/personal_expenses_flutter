@@ -86,8 +86,9 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   void loadData() {
     List<String> _spTransactions =
         _sharedPreferences.getStringList('userTransactions');
+    if (_spTransactions == null) return;
     _userTransactions = _spTransactions
-        .map((tx) => Transaction.fromMap(json.decode(tx)))
+        .map((item) => Transaction.fromMap(json.decode(item)))
         .toList();
     setState(() {});
   }
