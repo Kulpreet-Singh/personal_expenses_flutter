@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:flutter/services.dart';
 
 import './models/transaction.dart';
@@ -60,12 +62,34 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
-  final List<Transaction> _userTransactions = [];
+  List<Transaction> _userTransactions = [];
+  SharedPreferences _sharedPreferences;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    _initSharedPreferences();
+  }
+
+  _initSharedPreferences() async {
+    _sharedPreferences = await SharedPreferences.getInstance();
+    loadData();
+  }
+
+  void saveData() {
+    List<String> _spTransactions =
+        _userTransactions.map((tx) => json.encode(tx.toMap())).toList();
+    _sharedPreferences.setStringList('userTransactions', _spTransactions);
+  }
+
+  void loadData() {
+    List<String> _spTransactions =
+        _sharedPreferences.getStringList('userTransactions');
+    _userTransactions = _spTransactions
+        .map((tx) => Transaction.fromMap(json.decode(tx)))
+        .toList();
+    setState(() {});
   }
 
   @override
@@ -91,6 +115,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
     );
     setState(() {
       _userTransactions.add(newTx);
+      saveData();
     });
   }
 
@@ -99,6 +124,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
       _userTransactions.removeWhere((tx) {
         return tx.id == id;
       });
+      saveData();
     });
   }
 
