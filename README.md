@@ -1,4 +1,6 @@
 # personal_expenses_flutter
+   Version 1.0.0 is available in the release section.
+   
    The Personal Expenses app helps the user manage their expenses.
 
    - The user can add new transaction, user can select the date as well (can add a transaction in previous date as well).
@@ -14,3 +16,4 @@
    There can be further scope of optimization which I have not yet explored. This can be considered as a pre-release of this app.
 
    This is the first functional Flutter App I have created while learning flutter in the very first week. Hope you all like it.
+   
